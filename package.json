@@ -1,0 +1,37 @@
+{
+  "name": "create-asteroid",
+  "version": "1.0.1",
+  "description": "Scaffolding tool for the Asteroid project template",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "create-asteroid": "index.js"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "keywords": [],
+  "author": "Whistler",
+  "license": "MIT",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.18.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.18.0",
+  "dependencies": {
+    "chalk": "^6.0.1",
+    "clear": "^0.1.0",
+    "figlet": "^1.12.0",
+    "inquirer": "^14.3.0"
+  }
+}

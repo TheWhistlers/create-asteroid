@@ -1,0 +1,12 @@
+{
+  "display": {
+    "title": "Asteroid | Personal Blog",
+    "hero": {
+      "enabled": true,
+      "mode": "avatar",
+      "target": "/avatar.svg",
+      "name": "Asteroid & You"
+    },
+    "theme": "./src/styles/themes/github.scss"
+  }
+}

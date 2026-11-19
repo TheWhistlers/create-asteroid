@@ -1,0 +1,832 @@
+// ============================================================
+// 基础布局样式：与主题无关，颜色全部取自 CSS 变量
+// 主题变量由 display.theme 指定的 Scss 文件按需注入；
+// 下面的 :root / html.dark 只是主题加载失败时的兜底（Github 配色）。
+// 暗黑 / 光亮模式由 html.dark 切换。
+// ============================================================
+
+// ---------- 兜底配色（Github Themes） ----------
+:root {
+  --gh-canvas: #ffffff;
+  --gh-canvas-subtle: #f6f8fa;
+  --gh-canvas-inset: #f6f8fa;
+  --gh-header-bg: #f6f8fa;
+  --gh-fg: #1f2328;
+  --gh-fg-muted: #59636e;
+  --gh-border: #d1d9e0;
+  --gh-border-muted: #d1d9e080;
+  --gh-accent: #0969da;
+  --gh-accent-fg: #0969da;
+  --gh-accent-emphasis: #0550ae;
+  --gh-success: #1a7f37;
+  --gh-danger: #d1242f;
+  --gh-btn-bg: #f6f8fa;
+  --gh-btn-hover: #eef1f4;
+  --gh-shadow: 0 1px 3px rgba(31, 35, 40, 0.08), 0 8px 24px rgba(31, 35, 40, 0.12);
+
+  --md-fg: #1f2328;
+  --md-fg-muted: #59636e;
+  --md-link: #0969da;
+  --md-border: #d1d9e0;
+  --md-border-muted: #d8dee4;
+  --md-code-bg: #f6f8fa;
+  --md-code-fg: #1f2328;
+  --md-code-border: #d1d9e0;
+  --md-quote-bg: transparent;
+  --md-quote-mark: #d1d9e0;
+  --md-blockquote-fg: #59636e;
+  --md-table-head: #f6f8fa;
+  --md-table-stripe: #f6f8fa;
+  --md-hr: #d8dee4;
+  color-scheme: light;
+}
+
+html.dark {
+  --gh-canvas: #0d1117;
+  --gh-canvas-subtle: #151b23;
+  --gh-canvas-inset: #010409;
+  --gh-header-bg: #010409;
+  --gh-fg: #f0f6fc;
+  --gh-fg-muted: #9198a1;
+  --gh-border: #3d444d;
+  --gh-border-muted: #3d444d80;
+  --gh-accent: #4493f8;
+  --gh-accent-fg: #4493f8;
+  --gh-accent-emphasis: #1f6feb;
+  --gh-success: #3fb950;
+  --gh-danger: #f85149;
+  --gh-btn-bg: #212830;
+  --gh-btn-hover: #2a3139;
+  --gh-shadow: 0 1px 3px rgba(1, 4, 9, 0.6), 0 8px 24px rgba(1, 4, 9, 0.6);
+
+  --md-fg: #f0f6fc;
+  --md-fg-muted: #9198a1;
+  --md-link: #4493f8;
+  --md-border: #3d444d;
+  --md-border-muted: #3d444d;
+  --md-code-bg: #151b23;
+  --md-code-fg: #f0f6fc;
+  --md-code-border: #3d444d;
+  --md-quote-bg: transparent;
+  --md-quote-mark: #3d444d;
+  --md-blockquote-fg: #9198a1;
+  --md-table-head: #151b23;
+  --md-table-stripe: #151b23;
+  --md-hr: #3d444d;
+  color-scheme: dark;
+}
+
+// ---------- 基础 ----------
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--gh-canvas);
+  color: var(--gh-fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-size: 16px;
+  line-height: 1.5;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: var(--gh-accent-fg);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ---------- 顶部导航（GitHub Header 风格） ----------
+.gh-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  height: 62px;
+  background-color: var(--gh-header-bg);
+  border-bottom: 1px solid var(--gh-border);
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--gh-fg);
+
+    .brand-fallback {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &:hover {
+      text-decoration: none;
+      opacity: 0.85;
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+
+    a {
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: var(--gh-fg);
+      font-size: 14px;
+
+      &:hover {
+        background-color: var(--gh-btn-hover);
+        text-decoration: none;
+      }
+
+      &.router-link-active {
+        font-weight: 600;
+        color: var(--gh-accent-fg);
+      }
+    }
+  }
+}
+
+// ---------- 按钮 ----------
+.gh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--gh-fg);
+  background-color: var(--gh-btn-bg);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--gh-btn-hover);
+  }
+}
+
+// ---------- 页面容器 ----------
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: min(98vw, 1920px);
+  margin: 0 auto;
+  padding: 32px clamp(16px, 1.6vw, 28px) 64px;
+}
+
+// 总览页不需要三栏宽度
+.page--narrow {
+  max-width: 1012px;
+}
+
+.page-title {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gh-border-muted);
+}
+
+.page-subtitle {
+  margin: 8px 0 24px;
+  color: var(--gh-fg-muted);
+}
+
+// ---------- 卡片（GitHub Box 风格） ----------
+.gh-card {
+  background-color: var(--gh-canvas);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  box-shadow: none;
+
+  & + & {
+    margin-top: 16px;
+  }
+
+  .gh-card-header {
+    padding: 12px 16px;
+    font-weight: 600;
+    background-color: var(--gh-canvas-subtle);
+    border-bottom: 1px solid var(--gh-border);
+    border-radius: 6px 6px 0 0;
+  }
+
+  .gh-card-body {
+    padding: 16px;
+  }
+}
+
+// ---------- 文档目录树（总览页） ----------
+.doc-tree-card {
+  overflow: hidden;
+
+  .doc-tree-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    background-color: var(--gh-canvas-subtle);
+    border-bottom: 1px solid var(--gh-border);
+  }
+
+  .tree-root-icon,
+  .tree-root-slash,
+  .tree-header-meta {
+    color: var(--gh-fg-muted);
+  }
+
+  .tree-root-name {
+    font-weight: 600;
+  }
+
+  .doc-tree-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+
+    .gh-btn {
+      padding: 3px 10px;
+      font-size: 12px;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+
+        &:hover {
+          background-color: var(--gh-btn-bg);
+        }
+      }
+    }
+  }
+}
+
+.doc-tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc-tree-item + .doc-tree-item {
+  border-top: 1px solid var(--gh-border-muted);
+}
+
+.doc-tree-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--gh-fg);
+  text-align: left;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  transition: background-color 0.12s ease;
+
+  &:hover {
+    background-color: var(--gh-canvas-subtle);
+    text-decoration: none;
+
+    .tree-name {
+      color: var(--gh-accent-fg);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--gh-accent-emphasis);
+    outline-offset: -2px;
+  }
+}
+
+.doc-tree-dir {
+  cursor: pointer;
+
+  .tree-name {
+    font-weight: 600;
+  }
+
+  .tree-icon {
+    color: var(--gh-accent-fg);
+  }
+}
+
+.doc-tree-file .tree-name {
+  font-weight: 500;
+}
+
+.tree-caret {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  color: var(--gh-fg-muted);
+  transition: transform 0.18s ease;
+
+  &.collapsed {
+    transform: rotate(-90deg);
+  }
+
+  &--placeholder {
+    display: inline-block;
+  }
+}
+
+.tree-icon {
+  flex: none;
+  color: var(--gh-fg-muted);
+}
+
+.tree-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tree-count,
+.tree-meta {
+  flex: none;
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--gh-fg-muted);
+}
+
+.tree-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tree-date {
+  font-variant-numeric: tabular-nums;
+}
+
+.tree-path {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+@media (max-width: 600px) {
+  .tree-meta {
+    display: none;
+  }
+}
+
+// ---------- Markdown 正文 ----------
+.markdown-wrap {
+  background-color: var(--gh-canvas);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  padding: 36px 44px;
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
+
+  .markdown-body {
+    background-color: transparent;
+  }
+}
+
+// 跨主题共享的 Markdown 排版：结构固定，配色全部来自 --md-* 变量。
+// Github 主题会额外注入官方 github-markdown-css（作用域内特异性更高，自动覆盖这里）。
+.markdown-body {
+  color: var(--md-fg);
+  font-size: 16px;
+  line-height: 1.7;
+  word-wrap: break-word;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 24px 0 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--md-fg);
+  }
+
+  h1, h2 {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--md-border-muted);
+  }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.25em; }
+  h4 { font-size: 1em; }
+  h5 { font-size: 0.875em; }
+  h6 { font-size: 0.85em; color: var(--md-fg-muted); }
+
+  p, ul, ol, blockquote, table, pre, details {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  ul, ol { padding-left: 2em; }
+  li + li { margin-top: 0.25em; }
+
+  a { color: var(--md-link); }
+  strong { font-weight: 600; }
+
+  hr {
+    height: 1px;
+    margin: 24px 0;
+    border: 0;
+    background: var(--md-border);
+  }
+
+  blockquote {
+    padding: 0.5em 1em;
+    color: var(--md-blockquote-fg);
+    background: var(--md-quote-bg);
+    border-left: 0.25em solid var(--md-quote-mark);
+  }
+
+  img { max-width: 100%; }
+
+  table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 6px 13px;
+    border: 1px solid var(--md-border);
+  }
+
+  th { font-weight: 600; background: var(--md-table-head); }
+  tr:nth-child(2n) { background: var(--md-table-stripe); }
+
+  :not(pre) > code,
+  tt {
+    padding: 0.2em 0.4em;
+    font-size: 85%;
+    color: var(--md-code-fg);
+    background: var(--md-code-bg);
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.5;
+    color: var(--md-fg);
+    background: var(--md-code-bg);
+    border: 1px solid var(--md-code-border);
+    border-radius: 6px;
+  }
+
+  pre code {
+    padding: 0;
+    font-size: 100%;
+    color: inherit;
+    background: transparent;
+    border: 0;
+  }
+
+  // x-markdown-vue 会给内容根节点写死 inline color，用主题变量覆盖
+  .x-md-renderer {
+    color: var(--md-fg) !important;
+  }
+
+  // x-markdown-vue 自带样式是硬编码颜色，用主题变量覆盖代码高亮容器
+  .x-md-code-block {
+    background: var(--md-code-bg) !important;
+    border: 1px solid var(--md-code-border);
+  }
+
+  .x-md-code-header {
+    color: var(--md-fg-muted) !important;
+    background: var(--md-table-head) !important;
+  }
+
+  .x-md-code-block pre,
+  pre.shiki,
+  pre[class*='shiki'] {
+    background-color: var(--md-code-bg) !important;
+  }
+}
+
+// 放大正文字号：特异性需高于 github-markdown-css 的 html[data-theme] .markdown-body
+.md-layout .md-main .markdown-wrap .markdown-body {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+// ---------- 三栏布局：左右侧栏固定语义宽度，正文占满剩余空间 ----------
+.md-layout {
+  display: grid;
+  grid-template-columns: clamp(180px, 14vw, 250px) minmax(0, 1fr) clamp(180px, 14vw, 250px);
+  align-items: start;
+  gap: 20px;
+}
+
+.md-main {
+  min-width: 0;
+
+  // 底部留白：基础值 + 跳转末尾章节时按需动态补足的空间
+  &::after {
+    content: '';
+    display: block;
+    height: calc(10vh + var(--md-tail-extra, 0px));
+  }
+}
+
+.md-outline {
+  min-width: 0;
+  position: sticky;
+  top: 86px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  padding: 4px 0 4px 14px;
+  border-left: 1px solid var(--gh-border);
+  font-size: 13px;
+  scrollbar-width: thin;
+
+  .md-outline-title {
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--gh-fg-muted);
+  }
+
+  .md-outline-item {
+    display: block;
+    margin-left: -15px;
+    padding: 4px 8px 4px 13px;
+    border-left: 2px solid transparent;
+    border-radius: 0 4px 4px 0;
+    color: var(--gh-fg-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    transition: color 0.12s ease, background-color 0.12s ease;
+
+    &:hover {
+      color: var(--gh-accent-fg);
+      background-color: var(--gh-canvas-subtle);
+      text-decoration: none;
+    }
+
+    &.active {
+      color: var(--gh-accent-fg);
+      font-weight: 600;
+      border-left-color: var(--gh-accent-emphasis);
+      background-color: var(--gh-canvas-subtle);
+    }
+
+    &.lv-3 { padding-left: 25px; }
+    &.lv-4 { padding-left: 37px; }
+    &.lv-5 { padding-left: 49px; }
+    &.lv-6 { padding-left: 61px; }
+  }
+}
+
+// ---------- 右侧文档信息 ----------
+.md-doc-info {
+  min-width: 0;
+  position: sticky;
+  top: 86px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  font-size: 13px;
+
+  .info-body {
+    padding: 14px 16px 16px;
+  }
+
+  .info-list {
+    margin: 0;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 10px;
+    padding: 5px 0;
+    line-height: 1.5;
+
+    & + & {
+      border-top: 1px dashed var(--gh-border-muted);
+    }
+
+    dt {
+      flex: 0 0 52px;
+      color: var(--gh-fg-muted);
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      word-break: break-word;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .info-summary {
+    margin: 12px 0 0;
+    padding: 10px 12px;
+    color: var(--gh-fg-muted);
+    background-color: var(--gh-canvas-subtle);
+    border-left: 3px solid var(--gh-accent-emphasis);
+    border-radius: 0 4px 4px 0;
+    line-height: 1.6;
+  }
+
+  .info-section-title {
+    margin: 18px 0 8px;
+    padding-bottom: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--gh-fg-muted);
+    border-bottom: 1px solid var(--gh-border-muted);
+  }
+
+  .info-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .info-tag {
+    padding: 2px 9px;
+    font-size: 12px;
+    color: var(--gh-accent-fg);
+    background-color: var(--gh-canvas-subtle);
+    border: 1px solid var(--gh-border);
+    border-radius: 999px;
+  }
+
+  .info-refs {
+    margin: 0;
+    padding-left: 16px;
+
+    li {
+      padding: 4px 0;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+  }
+
+  .info-empty {
+    margin: 12px 0 0;
+    color: var(--gh-fg-muted);
+    line-height: 1.6;
+
+    code {
+      font-size: 12px;
+    }
+  }
+}
+
+// 中等屏幕：信息栏移到正文下方
+@media (max-width: 1200px) {
+  .md-layout {
+    grid-template-columns: clamp(180px, 14vw, 250px) minmax(0, 1fr);
+  }
+
+  .md-doc-info {
+    grid-column: 1 / -1;
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 900px) {
+  .md-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .md-outline {
+    display: none;
+  }
+
+  .md-doc-info {
+    grid-column: auto;
+  }
+}
+
+// ---------- Markdown 章节折叠 ----------
+.md-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gh-border-muted);
+
+  .md-toolbar-tip {
+    margin-right: auto;
+    font-size: 13px;
+    color: var(--gh-fg-muted);
+  }
+
+  .gh-btn {
+    padding: 2px 10px;
+    font-size: 12px;
+  }
+}
+
+.md-heading-collapsible {
+  position: relative;
+  padding-left: 1.1em;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0.1em;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 0.32em solid transparent;
+    border-left-color: var(--gh-fg-muted);
+    transform: translateY(-50%) rotate(90deg); // 展开：三角朝下
+    transform-origin: 50% 50%;
+    transition: transform 0.2s ease, border-left-color 0.15s ease;
+  }
+
+  &.collapsed::before {
+    transform: translateY(-50%) rotate(0deg); // 折叠：三角朝右
+  }
+
+  &:hover {
+    color: var(--gh-accent-fg);
+
+    &::before {
+      border-left-color: var(--gh-accent-fg);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--gh-accent-emphasis);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+}
+
+// 折叠时隐藏该标题管辖的所有节点（不移动 DOM，兼容 Vue 的 VNode patch）
+.md-section-hidden {
+  display: none !important;
+}
+
+// ---------- 错误页 ----------
+.error-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  .error-code {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--gh-fg-muted);
+  }
+}
+
+// ---------- 页脚 ----------
+.gh-footer {
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--gh-fg-muted);
+  border-top: 1px solid var(--gh-border-muted);
+}

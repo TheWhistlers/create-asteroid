@@ -1,0 +1,77 @@
+// ============================================================
+// Github Themes —— GitHub Primer 官方配色
+// display.theme: "src/styles/themes/github.scss"
+// Markdown 正文使用官方 github-markdown-css（light / dark 按主题作用域包裹）
+// ============================================================
+@use '../gh-light';
+@use '../gh-dark';
+
+html[data-theme='github'] {
+  --gh-canvas: #ffffff;
+  --gh-canvas-subtle: #f6f8fa;
+  --gh-canvas-inset: #f6f8fa;
+  --gh-header-bg: #f6f8fa;
+  --gh-fg: #1f2328;
+  --gh-fg-muted: #59636e;
+  --gh-border: #d1d9e0;
+  --gh-border-muted: #d1d9e080;
+  --gh-accent: #0969da;
+  --gh-accent-fg: #0969da;
+  --gh-accent-emphasis: #0550ae;
+  --gh-success: #1a7f37;
+  --gh-danger: #d1242f;
+  --gh-btn-bg: #f6f8fa;
+  --gh-btn-hover: #eef1f4;
+  --gh-shadow: 0 1px 3px rgba(31, 35, 40, 0.08), 0 8px 24px rgba(31, 35, 40, 0.12);
+
+  --md-fg: #1f2328;
+  --md-fg-muted: #59636e;
+  --md-link: #0969da;
+  --md-border: #d1d9e0;
+  --md-border-muted: #d8dee4;
+  --md-code-bg: #f6f8fa;
+  --md-code-fg: #1f2328;
+  --md-code-border: #d1d9e0;
+  --md-quote-bg: transparent;
+  --md-quote-mark: #d1d9e0;
+  --md-blockquote-fg: #59636e;
+  --md-table-head: #f6f8fa;
+  --md-table-stripe: #f6f8fa;
+  --md-hr: #d8dee4;
+  color-scheme: light;
+}
+
+html[data-theme='github'].dark {
+  --gh-canvas: #0d1117;
+  --gh-canvas-subtle: #151b23;
+  --gh-canvas-inset: #010409;
+  --gh-header-bg: #010409;
+  --gh-fg: #f0f6fc;
+  --gh-fg-muted: #9198a1;
+  --gh-border: #3d444d;
+  --gh-border-muted: #3d444d80;
+  --gh-accent: #4493f8;
+  --gh-accent-fg: #4493f8;
+  --gh-accent-emphasis: #1f6feb;
+  --gh-success: #3fb950;
+  --gh-danger: #f85149;
+  --gh-btn-bg: #212830;
+  --gh-btn-hover: #2a3139;
+  --gh-shadow: 0 1px 3px rgba(1, 4, 9, 0.6), 0 8px 24px rgba(1, 4, 9, 0.6);
+
+  --md-fg: #f0f6fc;
+  --md-fg-muted: #9198a1;
+  --md-link: #4493f8;
+  --md-border: #3d444d;
+  --md-border-muted: #3d444d;
+  --md-code-bg: #151b23;
+  --md-code-fg: #f0f6fc;
+  --md-code-border: #3d444d;
+  --md-quote-bg: transparent;
+  --md-quote-mark: #3d444d;
+  --md-blockquote-fg: #9198a1;
+  --md-table-head: #151b23;
+  --md-table-stripe: #151b23;
+  --md-hr: #3d444d;
+  color-scheme: dark;
+}

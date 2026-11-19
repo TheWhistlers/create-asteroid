@@ -1,0 +1,81 @@
+// ============================================================
+// Vue Themes —— 参考 Vue 官网（vuejs.org）的配色
+// 浅色：白底 + 墨蓝文字 + Vue 绿强调；暗色：#1b1b1f 深灰底
+// display.theme: "src/styles/themes/vue.scss"
+// 代码高亮自动配套 vitesse-light / vitesse-dark
+// ============================================================
+
+html[data-theme='vue'] {
+  --gh-canvas: #ffffff;
+  --gh-canvas-subtle: #f9f9fc;
+  --gh-canvas-inset: #f6f6f7;
+  --gh-header-bg: #ffffff;
+  --gh-fg: #213547;
+  --gh-fg-muted: #6b7280;
+  --gh-border: #e2e2e3;
+  --gh-border-muted: #e2e2e380;
+  --gh-accent: #42b883;
+  --gh-accent-fg: #0f9d68;
+  --gh-accent-emphasis: #35495e;
+  --gh-success: #10b981;
+  --gh-danger: #e45649;
+  --gh-btn-bg: #f9f9fc;
+  --gh-btn-hover: #eff1f4;
+  --gh-shadow: 0 1px 3px rgba(33, 53, 71, 0.08), 0 8px 24px rgba(33, 53, 71, 0.1);
+
+  --md-fg: #213547;
+  --md-fg-muted: #6b7280;
+  --md-link: #0f9d68;
+  --md-border: #e2e2e3;
+  --md-border-muted: #eaeaea;
+  --md-code-bg: #f6f6f7;
+  --md-code-fg: #35495e;
+  --md-code-border: #e2e2e3;
+  --md-quote-bg: #f3f9f6;
+  --md-quote-mark: #42b883;
+  --md-blockquote-fg: #5c6773;
+  --md-table-head: #f6f6f7;
+  --md-table-stripe: #fafafc;
+  --md-hr: #e2e2e3;
+  color-scheme: light;
+}
+
+html[data-theme='vue'].dark {
+  --gh-canvas: #1b1b1f;
+  --gh-canvas-subtle: #202127;
+  --gh-canvas-inset: #161618;
+  --gh-header-bg: #1b1b1f;
+  --gh-fg: #ebebeb;
+  --gh-fg-muted: #a1a1aa;
+  --gh-border: #3c3f44;
+  --gh-border-muted: #3c3f4480;
+  --gh-accent: #42b883;
+  --gh-accent-fg: #42d392;
+  --gh-accent-emphasis: #42b883;
+  --gh-success: #42d392;
+  --gh-danger: #f87171;
+  --gh-btn-bg: #202127;
+  --gh-btn-hover: #2b2d31;
+  --gh-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  --md-fg: #ebebeb;
+  --md-fg-muted: #a1a1aa;
+  --md-link: #42d392;
+  --md-border: #3c3f44;
+  --md-border-muted: #3c3f44;
+  --md-code-bg: #161618;
+  --md-code-fg: #ebebeb;
+  --md-code-border: #2f3135;
+  --md-quote-bg: #202b28;
+  --md-quote-mark: #42b883;
+  --md-blockquote-fg: #a1a1aa;
+  --md-table-head: #202127;
+  --md-table-stripe: #1e1f23;
+  --md-hr: #3c3f44;
+  color-scheme: dark;
+}
+
+// Vue 官网标志性的绿色顶边
+html[data-theme='vue'] .gh-header {
+  box-shadow: inset 0 2px 0 0 #42b883;
+}
