@@ -30,7 +30,7 @@ console.log(chalk.greenBright(`Author: [${authorsArr.join(', ')}]`));
 
 // 生成项目
 try {
-    const targetDir = generate(projectName, theme, authorsArr);
+    const targetDir = await generate(projectName, theme, authorsArr);
 
     console.log('');
     console.log(chalk.cyanBright(`Project created at ${targetDir}`));
